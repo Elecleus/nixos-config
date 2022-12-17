@@ -6,15 +6,18 @@
       ./hardware-configuration.nix
     ];
 
-  boot.loader = {
-    grub = {
-      enable = true;
-      version = 2;
-      device = "/dev/sdb";
-      efiSupport = true;
-      efiInstallAsRemovable = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      grub = {
+        enable = true;
+        version = 2;
+        device = "/dev/sdb";
+        efiSupport = true;
+        efiInstallAsRemovable = true;
+      };
+      efi.efiSysMountPoint = "/boot/efi";
     };
-    efi.efiSysMountPoint = "/boot/efi";
   };
 
   networking = {
@@ -32,11 +35,11 @@
   };
 
   services = {
-    #xserver = {
-    #  enable = true;
-    #  displayManager.lightdm.enable = false;
-    #  windowManager.qtile.enable = true;
-    #};
+    server = {
+      enable = true;
+      displayManager.sddm.enable = false;
+      desktopManager.plasma5.enable = true;
+    };
 
     pipewire = {
       enable = true;
@@ -49,9 +52,12 @@
   sound.enable = true;
 
   environment.systemPackages = with pkgs; [
-    waybar swaybg foot neofetch
+    #waybar swaybg foot
+    neofetch
     tree
-    chromium qv2ray 
+    openssh gnupg
+    chromium 
+    #qv2ray 
   ];
 
   programs = {
@@ -66,7 +72,7 @@
   system.stateVersion = "unstable";
   nix.settings = {
     substituters = [
-      #"https://mirrors.bfsu.edu.cn/nix-channels/store"
+      "https://mirrors.bfsu.edu.cn/nix-channels/store"
       "https://mirror.sjtu.edu.cn/nix-channels/store"
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://mirrors.nju.edu.cn/nix-channels/store"

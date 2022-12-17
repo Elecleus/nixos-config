@@ -16,28 +16,28 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/daa631cb-41a7-4754-b82f-8e464e6731ac";
+      device = "/dev/disk/by-uuid/adf9a936-8864-42b8-93dd-e47b0d0459c4";
       fsType = "btrfs";
       options = [ "ssd,discard,noatime,compress=zstd,subvol=@" ];
     };
 
   fileSystems."/home" =
     {
-      device = "/dev/disk/by-uuid/daa631cb-41a7-4754-b82f-8e464e6731ac";
+      device = "/dev/disk/by-uuid/adf9a936-8864-42b8-93dd-e47b0d0459c4";
       fsType = "btrfs";
       options = [ "ssd,discard,noatime,compress=zstd,subvol=@home" ];
     };
 
   fileSystems."/nix" =
     {
-      device = "/dev/disk/by-uuid/daa631cb-41a7-4754-b82f-8e464e6731ac";
+      device = "/dev/disk/by-uuid/adf9a936-8864-42b8-93dd-e47b0d0459c4";
       fsType = "btrfs";
       options = [ "ssd,discard,noatime,compress=zstd,subvol=@nix" ];
     };
 
   fileSystems."/boot/efi" =
     {
-      device = "/dev/disk/by-uuid/108C-10A8";
+      device = "/dev/disk/by-uuid/F40A-AC02";
       fsType = "vfat";
     };
 
