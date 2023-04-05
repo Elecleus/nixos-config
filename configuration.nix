@@ -4,6 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./python.nix
     ];
 
   boot = {
@@ -27,17 +28,25 @@
 
   time.timeZone = "Asia/Shanghai";
 
-  i18n.defaultLocale = "zh_CN.UTF-8";
+  i18n = {
+    defaultLocale = "zh_CN.UTF-8";
+    inputMethod = {
+      enabled = "fcitx5";
+      fcitx5.addons = with pkgs; [
+        fcitx5-chinese-addons 
+      ];
+    };
+  };
 
   users.users.elecleus = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable 'sudo' for the user.
+    extraGroups = [ "wheel" ];
   };
 
   services = {
-    server = {
+    xserver = {
       enable = true;
-      displayManager.sddm.enable = false;
+      displayManager.sddm.enable = true;
       desktopManager.plasma5.enable = true;
     };
 
@@ -51,22 +60,27 @@
 
   sound.enable = true;
 
+  hardware.pulseaudio.enable = false;
+
   environment.systemPackages = with pkgs; [
-    #waybar swaybg foot
-    neofetch
-    tree
-    openssh gnupg
+    neofetch tree
+    openssh 
     chromium 
-    #qv2ray 
+    ddnet
+    ntfs3g
   ];
+
+  nixpkgs.config.allowUnfree = true;
 
   programs = {
     git.enable = true;
     neovim = {
       enable = true;
+      viAlias = true;
       vimAlias = true;
       defaultEditor = true;
     };
+    kdeconnect.enable = true;
   };
 
   system.stateVersion = "unstable";
@@ -76,7 +90,6 @@
       "https://mirror.sjtu.edu.cn/nix-channels/store"
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://mirrors.nju.edu.cn/nix-channels/store"
-      "https://mirrors.ustc.edu.cn/nix-channels/store"
     ];
     experimental-features = [ "nix-command" "flakes" ];
   };
@@ -87,17 +100,35 @@
       enable = true;
       defaultFonts = {
         emoji = [ "Noto Color Emoji" ];
-        monospace = [ "Noto Sans Mono CJK SC" ];
-        sansSerif = [ "Noto Sans CJK SC" ];
-        serif = [ "Source Serif CJK SC" ];
+        monospace = [
+	  #"WenQuanYi Micro Hei Mono"
+	  "Sarasa Han Mono SC"
+	  "Source Sans Mono CJK SC"
+	];
+        sansSerif = [
+	  #"WenQuanYi Micro Hei"
+	  "Sarasa Han Sans SC"
+	  "Source Sans CJK SC"
+	];
+        serif = [
+	  #"WenQuanYi Micro Hei"
+	  "Sarasa Han Serif SC"
+	  "Source Serif CJK SC"
+	];
       };
     };
     fontDir.enable = true;
-    #enableGhostscriptFonts = true;
+    enableGhostscriptFonts = true;
     fonts = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk
+      source-han-mono
+      source-han-sans
+      source-han-serif
       noto-fonts-emoji
+      liberation_ttf
+      dejavu_fonts
+      wqy_zenhei
+      wqy_microhei
+      sarasa-gothic
     ];
   };
 }
