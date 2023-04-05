@@ -3,31 +3,51 @@
 #
 
 function pull() {
-	cp -r /etc/nixos/* ./
+	if [ ! -d "./config" ]; then
+		echo "E: Directory './config' not found, creating."
+		mkdir ./config
+	fi
+	rm ./config/*
+	cp -r /etc/nixos/* ./config/
 }
+
 
 function push() {
 	if [[ $EUID -ne 0 ]]; then
-		echo "Please run me as root."
+		echo "E: Please run me as root!"
 		exit 1
 	fi
-	cp -r ./* /etc/nixos/
+	if [ ! -d "./config" ]; then
+		echo "E: Directory './config' not found, please create it!"
+		exit 1
+	fi
+	if [ ! -d "/etc/nixos" ]; then
+		echo "E: Directory '/etc/nixos' not found, please create it!"
+		exit 1
+	fi
+	if [ ! -d "./backup" ]; then
+		mkdir ./backup
+	fi
+	backup_dir="./backup/`date +"%Y-%m-%d_%H-%M-%S"`_backup"
+	mkdir -p $backup_dir
+	cp -r /etc/nixos/* $backup_dir 
+	rm /etc/nixos/*
+	cp -r ./config/* /etc/nixos/
 }
 
 function main() {
-	if [[ $1 -eq "pull" ]]; then
-		echo -n "Pulling:"
+	if [[ $1 == "pull" ]]; then
+		echo "Pulling:"
 		pull
 		echo "Succeed!"
 		exit 0
-	else
-		if [[ $1 -eq "push" ]]; then
-			echo -n "Pushing:"
-			push
-			echo "Succeed!"
-			exit 0
-		fi
+	elif
+		[[ $1 == "push" ]]; then
+		echo "Pushing:"
+		push
+		echo "Succeed!"
+		exit 0
 	fi
 }
 
-main
+main "$@"
