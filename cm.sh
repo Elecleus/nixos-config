@@ -1,5 +1,5 @@
 #
-# NixOS Multi-user Config Manager
+# NixOS Config Manager
 #
 
 function pull() {
