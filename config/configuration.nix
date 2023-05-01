@@ -1,25 +1,13 @@
-{ config, pkgs,lib , ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
     [
       ./hardware-configuration.nix
       ./python.nix
+      ./fonts.nix
+      ./boot.nix
     ];
-
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader = {
-      grub = {
-        enable = true;
-        version = 2;
-        device = "/dev/sdb";
-        efiSupport = true;
-        efiInstallAsRemovable = true;
-      };
-      efi.efiSysMountPoint = "/boot/efi";
-    };
-  };
 
   networking = {
     hostName = "wanderer";
@@ -33,7 +21,7 @@
     inputMethod = {
       enabled = "fcitx5";
       fcitx5.addons = with pkgs; [
-        fcitx5-chinese-addons 
+        fcitx5-chinese-addons
       ];
     };
   };
@@ -60,16 +48,29 @@
 
   sound.enable = true;
 
-  hardware.pulseaudio.enable = false;
+  hardware = {
+    pulseaudio.enable = false;
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+
+  };
 
   environment.systemPackages = with pkgs; [
-    neofetch tree
-    openssh 
+    neofetch
+    tree
+    openssh
     chromium
     qv2ray
     ddnet
     ntfs3g
     vscode
+    libreoffice
+    musescore
+    steam
+    nixpkgs-fmt rustup gcc
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -94,43 +95,5 @@
       "https://mirrors.nju.edu.cn/nix-channels/store"
     ];
     experimental-features = [ "nix-command" "flakes" ];
-  };
-
-  fonts = {
-    enableDefaultFonts = true;
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        emoji = [ "Noto Color Emoji" ];
-        monospace = [
-	  #"WenQuanYi Micro Hei Mono"
-	  #"Sarasa Han Mono SC"
-	  "Source Sans Mono CJK SC"
-	];
-        sansSerif = [
-	  #"WenQuanYi Micro Hei"
-	  #"Sarasa Han Sans SC"
-	  "Source Sans CJK SC"
-	];
-        serif = [
-	  #"WenQuanYi Micro Hei"
-	  #"Sarasa Han Serif SC"
-	  "Source Serif CJK SC"
-	];
-      };
-    };
-    fontDir.enable = true;
-    enableGhostscriptFonts = true;
-    fonts = with pkgs; [
-      source-han-mono
-      source-han-sans
-      source-han-serif
-      noto-fonts-emoji
-      liberation_ttf
-      dejavu_fonts
-      wqy_zenhei
-      wqy_microhei
-      sarasa-gothic
-    ];
   };
 }

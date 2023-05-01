@@ -13,10 +13,10 @@ function pull() {
 
 
 function push() {
-	if [[ $EUID -ne 0 ]]; then
-		echo "E: Please run me as root!"
-		exit 1
-	fi
+	# if [[ $EUID -ne 0 ]]; then
+	# 	echo "E: Please run me as root!"
+	# 	exit 1
+	# fi
 	if [ ! -d "./config" ]; then
 		echo "E: Directory './config' not found, please create it!"
 		exit 1
@@ -31,8 +31,8 @@ function push() {
 	backup_dir="./backup/`date +"%Y-%m-%d_%H-%M-%S"`_backup"
 	mkdir -p $backup_dir
 	cp -r /etc/nixos/* $backup_dir 
-	rm /etc/nixos/*
-	cp -r ./config/* /etc/nixos/
+	sudo rm -r /etc/nixos/*
+	sudo cp -r ./config/* /etc/nixos/
 }
 
 function main() {
