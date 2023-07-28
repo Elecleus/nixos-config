@@ -75,6 +75,7 @@
     vlc
     steam
     nixpkgs-fmt rustup gcc
+    #foot
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -88,6 +89,10 @@
       defaultEditor = true;
     };
     kdeconnect.enable = true;
+    #hyprland = {
+    #  enable = true;
+    #  nvidiaPatches = true;
+    #};
   };
 
   system.stateVersion = "unstable";
