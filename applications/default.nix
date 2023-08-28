@@ -11,6 +11,7 @@
     openssh
     chromium
     microsoft-edge
+    #firefox
     electron
     qv2ray
     ddnet

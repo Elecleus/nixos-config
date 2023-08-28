@@ -2,7 +2,7 @@
 
 {
   fonts = {
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
     fontconfig = {
       enable = true;
       defaultFonts = {
@@ -26,7 +26,7 @@
     };
     fontDir.enable = true;
     enableGhostscriptFonts = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       source-han-mono
       source-han-sans
       source-han-serif
