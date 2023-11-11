@@ -1,8 +1,0 @@
-{
-  imports =
-    [
-      ./applications
-      ./desktop
-      ./system
-    ];
-}

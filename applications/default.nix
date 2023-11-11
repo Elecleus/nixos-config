@@ -12,8 +12,8 @@
     chromium
     microsoft-edge
     #firefox
-    electron
-    qv2ray
+    #electron
+    #qv2ray
     ddnet
     ntfs3g
     vscode
@@ -24,7 +24,7 @@
     nixpkgs-fmt
     rustup
     gcc
-    #foot
+    foot
   ];
 
   nixpkgs.config.allowUnfree = true;

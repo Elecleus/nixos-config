@@ -18,4 +18,9 @@
       };
     };
   };
+
+  services = {
+    v2raya.enable = true;
+    #xray.enable = true;
+  };
 }
