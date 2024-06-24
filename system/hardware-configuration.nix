@@ -2,6 +2,7 @@
 
 let
   updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  root-btrfs-device = "/dev/disk/by-uuid/d2639486-8273-4152-911d-25d0ecf66e0c";
 in
 {
   imports =
@@ -16,14 +17,35 @@ in
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/d9959329-d357-40d4-a740-6368fb76f666";
+      device = root-btrfs-device;
       fsType = "btrfs";
-      options = [ "ssd,discard,noatime,compress=zstd" ];
+      options = [ "ssd,discard,noatime,compress=zstd,subvol=@" ];
+    };
+
+  fileSystems."/nix" =
+    {
+      device = root-btrfs-device;
+      fsType = "btrfs";
+      options = [ "ssd,discard,noatime,compress=zstd,subvol=@nix" ];
+    };
+
+  fileSystems."/.snapshots" =
+    {
+      device = root-btrfs-device;
+      fsType = "btrfs";
+      options = [ "ssd,discard,noatime,compress=zstd,subvol=@snapshots" ];
+    };
+
+  fileSystems."/home" =
+    {
+      device = root-btrfs-device;
+      fsType = "btrfs";
+      options = [ "ssd,discard,noatime,compress=zstd,subvol=@home" ];
     };
 
   fileSystems."/boot/efi" =
     {
-      device = "/dev/disk/by-uuid/F102-D954";
+      device = "/dev/disk/by-uuid/0396-20D5";
       fsType = "vfat";
     };
 

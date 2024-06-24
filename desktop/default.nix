@@ -17,7 +17,7 @@
       #displayManager.sddm.enable = true;
       #desktopManager.plasma5.enable = true;
       #desktopManager.budgie.enable = true;
-      #displayManager.lightdm.enable = true;
+      displayManager.lightdm.enable = false;
     };
 
     pipewire = {
@@ -26,11 +26,6 @@
       jack.enable = true;
       alsa.enable = true;
     };
-  };
-
-  programs.hyprland = {
-    enable = true;
-    #package = inputs.hyprland.packages.${pkgs.system}.package;
   };
 
   sound.enable = true;

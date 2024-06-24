@@ -8,7 +8,7 @@
 
   time.timeZone = "Asia/Shanghai";
 
-  system.stateVersion = "unstable";
+  system.stateVersion = "23.11";
 
   nix.settings = {
     substituters = [

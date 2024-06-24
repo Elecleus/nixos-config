@@ -1,6 +1,10 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
+  # nixpkgs.overlays = [
+  #   inputs.niri.overlays.niri
+  # ];
+
   imports = [
     ./programming
   ];
@@ -8,6 +12,7 @@
   environment.systemPackages = with pkgs; [
     neofetch
     tree
+    waybar
     openssh
     chromium
     microsoft-edge
@@ -24,7 +29,6 @@
     nixpkgs-fmt
     rustup
     gcc
-    foot
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -37,7 +41,7 @@
       vimAlias = true;
       defaultEditor = true;
     };
-    
+    waybar.enable = true;
     kdeconnect.enable = config.services.xserver.desktopManager.plasma5.enable;
   };
 }

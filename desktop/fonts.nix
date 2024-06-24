@@ -36,6 +36,7 @@
       wqy_zenhei
       wqy_microhei
       #sarasa-gothic
+      nerdfonts
     ];
   };
 }
