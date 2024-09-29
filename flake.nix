@@ -3,23 +3,26 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland = {
-      url = "github:hyprwm/hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    anyrun.url = "github:Kirottu/anyrun";
+    # hyprland = {
+    #   url = "github:hyprwm/hyprland";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # anyrun.url = "github:Kirottu/anyrun";
   };
 
   outputs = {
     self,
     nixpkgs,
+    nixos-wsl,
     home-manager,
-    hyprland,
-    anyrun,
+    # hyprland,
+    # anyrun,
     ...
   } @ inputs: {
     nixosConfigurations = {
@@ -40,6 +43,30 @@
               users.elecleus = import ./home;
             };
           }
+        ];
+      };
+
+      "insider" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          nixos-wsl.nixosModules.default
+          {
+            system.stateVersion = "24.05";
+            wsl.enable = true;
+
+            networking.hostName = "insider";
+
+            nix.settings = {
+              substituters = [
+                "https://mirrors.bfsu.edu.cn/nix-channels/store"
+                # "https://mirror.sjtu.edu.cn/nix-channels/store"
+                "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+                "https://mirrors.nju.edu.cn/nix-channels/store"
+              ];
+              experimental-features = [ "nix-command" "flakes" ];
+            };
+          }
+          ./wsl
         ];
       };
     };
