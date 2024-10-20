@@ -2,15 +2,14 @@
 
 {
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_10;
     loader = {
-      grub = {
-        enable = true;
-        device = "/dev/sdb";
-        efiSupport = true;
-        efiInstallAsRemovable = true;
+      systemd-boot.enable = true;
+      efi = {
+        canTouchEfiVariables = false;
+        efiSysMountPoint = "/boot/efi";
       };
-      efi.efiSysMountPoint = "/boot/efi";
     };
   };
 }

@@ -14,10 +14,9 @@
   services = {
     xserver = {
       enable = true;
-      #displayManager.sddm.enable = true;
-      #desktopManager.plasma5.enable = true;
-      #desktopManager.budgie.enable = true;
-      displayManager.lightdm.enable = false;
+
+      desktopManager.budgie.enable = true;
+      displayManager.lightdm.enable = true;
     };
 
     pipewire = {
@@ -28,15 +27,13 @@
     };
   };
 
-  sound.enable = true;
-
   hardware = {
     pulseaudio.enable = false;
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-    };
+    opengl.enable = true;
 
+    nvidia = {
+      open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.nvidia_x11;
+    };
   };
 }

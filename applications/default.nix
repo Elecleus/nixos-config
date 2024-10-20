@@ -12,20 +12,20 @@
   environment.systemPackages = with pkgs; [
     neofetch
     tree
-    waybar
-    openssh
-    chromium
+    # waybar
+    # openssh
+    # chromium
     microsoft-edge
     #firefox
     #electron
     #qv2ray
-    ddnet
-    ntfs3g
+    # ddnet
+    # ntfs3g
     vscode
-    libreoffice
-    musescore
-    vlc
-    steam
+    # libreoffice
+    # musescore
+    # vlc
+    # steam
     nixpkgs-fmt
     rustup
     gcc
@@ -41,7 +41,7 @@
       vimAlias = true;
       defaultEditor = true;
     };
-    waybar.enable = true;
-    kdeconnect.enable = config.services.xserver.desktopManager.plasma5.enable;
+    # waybar.enable = true;
+    # kdeconnect.enable = config.services.xserver.desktopManager.plasma5.enable;
   };
 }
