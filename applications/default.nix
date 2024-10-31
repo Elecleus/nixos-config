@@ -12,6 +12,7 @@
   environment.systemPackages = with pkgs; [
     neofetch
     tree
+    helix
     # waybar
     # openssh
     # chromium
@@ -24,7 +25,7 @@
     vscode
     # libreoffice
     # musescore
-    # vlc
+    vlc
     # steam
     nixpkgs-fmt
     rustup
@@ -42,6 +43,6 @@
       defaultEditor = true;
     };
     # waybar.enable = true;
-    # kdeconnect.enable = config.services.xserver.desktopManager.plasma5.enable;
+    kdeconnect.enable = config.services.desktopManager.plasma6.enable;
   };
 }

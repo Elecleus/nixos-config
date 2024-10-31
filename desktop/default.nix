@@ -6,18 +6,13 @@
     ./inputmethod.nix
   ];
 
-  #hyprland = {
-  #  enable = true;
-  #  nvidiaPatches = true;
-  #};
-
   services = {
-    xserver = {
+    displayManager.sddm = {
       enable = true;
-
-      desktopManager.budgie.enable = true;
-      displayManager.lightdm.enable = true;
+      wayland.enable = true;
     };
+    desktopManager.plasma6.enable = true;
+    xserver.videoDrivers = [ "nvidia" ];
 
     pipewire = {
       enable = true;
@@ -27,13 +22,17 @@
     };
   };
 
+  environment.plasma6.excludePackages = with pkgs; [
+    kdePackages.elisa
+  ];
+
   hardware = {
     pulseaudio.enable = false;
-    opengl.enable = true;
+    graphics.enable = true;
 
     nvidia = {
       open = true;
-      package = config.boot.kernelPackages.nvidiaPackages.nvidia_x11;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
   };
 }
