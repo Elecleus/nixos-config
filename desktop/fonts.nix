@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   fonts = {
@@ -8,19 +8,13 @@
       defaultFonts = {
         emoji = [ "Noto Color Emoji" ];
         monospace = [
-          #"WenQuanYi Micro Hei Mono"
-          #"Sarasa Han Mono SC"
-          "Source Sans Mono CJK SC"
+          "Noto Sans Mono CJK SC"
         ];
         sansSerif = [
-          #"WenQuanYi Micro Hei"
-          #"Sarasa Han Sans SC"
-          "Source Sans CJK SC"
+          "Noto Sans CJK SC"
         ];
         serif = [
-          #"WenQuanYi Micro Hei"
-          #"Sarasa Han Serif SC"
-          "Source Serif CJK SC"
+          "Noto Serif CJK SC"
         ];
       };
     };
@@ -28,14 +22,12 @@
     enableGhostscriptFonts = true;
     packages = with pkgs; [
       source-han-mono
-      source-han-sans
-      source-han-serif
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
       noto-fonts-emoji
-      #liberation_ttf
       dejavu_fonts
       wqy_zenhei
       wqy_microhei
-      #sarasa-gothic
       nerdfonts
     ];
   };

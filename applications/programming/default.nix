@@ -1,4 +1,7 @@
 {
-  imports = [ ./python.nix ];
-  virtualisation.docker.enable = true;
+  imports = [
+    ./python.nix 
+    ./typst.nix
+    ./nix.nix
+  ];
 }
