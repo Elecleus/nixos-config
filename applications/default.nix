@@ -1,4 +1,9 @@
-{ lib, config, pkgs, inputs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   # nixpkgs.overlays = [
@@ -7,31 +12,29 @@
 
   imports = [
     ./programming
+    ./steam.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    neofetch
-    tree
-    helix
-    # waybar
-    # openssh
-    # chromium
-    microsoft-edge
-    #firefox
-    #electron
-    #qv2ray
-    # ddnet
-    # ntfs3g
-    vscode
-    # libreoffice
-    # musescore
-    vlc
-    # steam
-    nixpkgs-fmt
-    rustup
-    gcc
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      fastfetch
+      tree
+      kitty
+      helix
+      microsoft-edge
+      vscode
+      vlc
+      xournalpp
+      rustup
+      qq
 
+      inputs.zen-browser.packages."${system}".specific
+    ];
+    shellAliases = {
+      edge-wayland = "microsoft-edge --ozone-platform=wayland --enable-wayland-ime";
+      edge-wayland-full-ime = "GTK_IM_MODULE=fcitx XMODIFIERS=@im=fcitx SDL_IM_MODULE=fcitx edge-wayland --gtk-version=4";
+    };
+  };
   nixpkgs.config.allowUnfree = true;
 
   programs = {
@@ -42,7 +45,7 @@
       vimAlias = true;
       defaultEditor = true;
     };
-    # waybar.enable = true;
+    ssh.forwardX11 = true;
     kdeconnect.enable = config.services.desktopManager.plasma6.enable;
   };
 }

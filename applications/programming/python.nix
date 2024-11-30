@@ -1,14 +1,8 @@
 { pkgs, ... }:
-let
-  my-python-packages = p: with p; [
-    requests
-    blessed
-    autopep8
-    pip
-  ];
-in
+
 {
-  environment.systemPackages = [
-    (pkgs.python3.withPackages my-python-packages)
+  environment.systemPackages = with pkgs; [
+    conda
+    python3Packages.python-lsp-server
   ];
 }

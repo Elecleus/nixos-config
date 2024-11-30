@@ -17,6 +17,9 @@
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://mirrors.nju.edu.cn/nix-channels/store"
     ];
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 }

@@ -2,7 +2,8 @@
 
 {
   environment.systemPackages = with pkgs; [
-    nil
-    nixfmt-rfc-style
+    clang-tools
+    clang
+    gdb
   ];
 }

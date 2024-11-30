@@ -8,27 +8,26 @@
       defaultFonts = {
         emoji = [ "Noto Color Emoji" ];
         monospace = [
-          "Noto Sans Mono CJK SC"
+          "Maple Mono SC NF"
         ];
         sansSerif = [
           "Noto Sans CJK SC"
+          "Maple Mono SC NF"
         ];
         serif = [
           "Noto Serif CJK SC"
+          "Maple Mono SC NF"
         ];
       };
     };
-    fontDir.enable = true;
+    # fontDir.enable = true;
     enableGhostscriptFonts = true;
     packages = with pkgs; [
-      source-han-mono
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-emoji
-      dejavu_fonts
-      wqy_zenhei
-      wqy_microhei
-      nerdfonts
+      # nerdfonts
+      maple-mono-SC-NF
     ];
   };
 }
