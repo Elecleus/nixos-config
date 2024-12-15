@@ -25,7 +25,7 @@
     hyprsunset
     # hyprcursor
     hyprpaper
-    waybar 
+    waybar
 
     rose-pine-cursor
     # catppuccin-cursors.macchiatoDark

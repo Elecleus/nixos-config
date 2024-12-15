@@ -4,6 +4,7 @@
 {
   config,
   lib,
+  pkgs,
   modulesPath,
   ...
 }:
@@ -16,39 +17,25 @@
   boot.initrd.availableKernelModules = [
     "nvme"
     "xhci_pci"
-    "uas"
+    "usb_storage"
     "usbhid"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [
-    "nvidia"
-    "amdgpu"
-  ];
-  boot.kernelModules = [
-    "kvm-amd"
-    "nvidia"
-    "amdgpu"
-  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/72741880-000e-490a-9980-4b5ddc2cfc27";
+    device = "/dev/disk/by-uuid/31a5d101-615f-4e4b-b5d7-1450b82fdf5a";
     fsType = "btrfs";
-    options = [
-      "ssd"
-      "discard"
-      "noatime"
-      "compress=zstd"
-    ];
   };
 
   fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/AC47-699C";
+    device = "/dev/disk/by-uuid/8867-BFAF";
     fsType = "vfat";
     options = [
       "fmask=0022"
       "dmask=0022"
-      "noatime"
     ];
   };
 

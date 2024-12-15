@@ -4,6 +4,6 @@
     ./typst.nix
     ./nix.nix
     ./cpp.nix
-    # ./mysql.nix
+    ./rust.nix
   ];
 }

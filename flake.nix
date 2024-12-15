@@ -2,9 +2,10 @@
   description = "Elecleus's NixOS Flake";
 
   inputs = {
-    nixpkgs.follows = "nixos-cosmic/nixpkgs";
+    nipkgs.url = "github:NixOS/nixpkgs";
+    # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -14,11 +15,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
-    hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.45.2";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    # hyprland = {
+    #   url = "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.45.2";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # anyrun.url = "github:Kirottu/anyrun";
   };
 
@@ -28,7 +29,7 @@
       nixpkgs,
       nixos-wsl,
       home-manager,
-      nixos-cosmic,
+      # nixos-cosmic,
       ...
     }@inputs:
     {
@@ -41,24 +42,7 @@
             inherit inputs;
           };
           modules = [
-            ./applications
-            ./desktop
-            ./system
-
-            nixos-cosmic.nixosModules.default
-
-            {
-              nix.settings = {
-                substituters = [
-                  "https://cosmic.cachix.org/"
-                  "https://nix-community.cachix.org"
-                ];
-                trusted-public-keys = [
-                  "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
-                  "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-                ];
-              };
-            }
+            # nixos-cosmic.nixosModules.default
 
             # home-manager.nixosModules.home-manager
             # {
@@ -70,41 +54,27 @@
             #     users.elecleus = import ./home;
             #   };
             # }
+
+            ./hosts/wanderer
           ];
         };
 
-        "insider" = nixpkgs.lib.nixosSystem {
+        "explorer" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
-            nixos-wsl.nixosModules.default
-            {
-              system.stateVersion = "24.05";
-              wsl.enable = true;
-
-              networking.hostName = "insider";
-
-              nix.settings = {
-                substituters = [
-                  "https://mirrors.bfsu.edu.cn/nix-channels/store"
-                  # "https://mirror.sjtu.edu.cn/nix-channels/store"
-                  "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
-                  "https://mirrors.nju.edu.cn/nix-channels/store"
-                ];
-                experimental-features = [
-                  "nix-command"
-                  "flakes"
-                ];
-              };
-            }
-            ./wsl
+            ./hosts/explorer
           ];
         };
+
       };
     };
 
   nixConfig = {
     extra-substituters = [
-
+      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cosmic.cachix.org/"
       "https://nix-community.cachix.org"
       "https://hyprland.cachix.org"
