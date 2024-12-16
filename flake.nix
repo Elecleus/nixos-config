@@ -21,6 +21,8 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
     # anyrun.url = "github:Kirottu/anyrun";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware";  
   };
 
   outputs =
@@ -66,6 +68,7 @@
           };
           modules = [
             ./hosts/explorer
+            inputs.nixos-hardware.nixosModules.microsoft-surface-pro-intel
           ];
         };
 

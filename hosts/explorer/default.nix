@@ -1,5 +1,6 @@
 {
   lib,
+  ...
 }:
 {
   imports =
@@ -12,7 +13,7 @@
       /boot/system-boot.nix
       /qq.nix
       /desktop
-      /desktop/flavor/hyprland.nix
+      /desktop/flavor/gnome.nix
     ];
 
   networking.hostName = "explorer";
