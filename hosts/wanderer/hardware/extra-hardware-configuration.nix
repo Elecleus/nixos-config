@@ -11,14 +11,17 @@
   hardware.nvidia = {
     open = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-      amdgpuBusId = "PCI:5:0:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
+    # prime = {
+    #   reverseSync.enable = true;
+    #   # offload = {
+    #   #   enable = true;
+    #   #   enableOffloadCmd = true;
+    #   # };
+    #   amdgpuBusId = "PCI:5:0:0";
+    #   nvidiaBusId = "PCI:1:0:0";
+    # };
+    nvidiaSettings = true;
+    powerManagement = {enable = false; finegrained = false;};
   };
 
   boot.initrd.kernelModules = [

@@ -22,7 +22,7 @@
     # };
     # anyrun.url = "github:Kirottu/anyrun";
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware";  
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";  
   };
 
   outputs =
@@ -68,7 +68,9 @@
           };
           modules = [
             ./hosts/explorer
-            inputs.nixos-hardware.nixosModules.microsoft-surface-pro-intel
+
+            # Actually Explorer goes lenovo-thinkpad-x390-yoga
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
           ];
         };
 
