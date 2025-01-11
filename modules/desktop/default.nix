@@ -13,7 +13,15 @@
 
   environment = {
     systemPackages = with pkgs; [
-      vscode
+
+      (vscode.override {
+        commandLineArgs = [
+          "--enable-features=UseOzonePlatform"
+          "--ozone-platform-hint=auto"
+          "--enable-wayland-ime"
+        ];
+      })
+
       vlc
       xournalpp
       rnote
