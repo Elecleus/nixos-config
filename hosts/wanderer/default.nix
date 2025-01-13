@@ -14,6 +14,7 @@
       /docker.nix
       /desktop
       /desktop/flavor/plasma6.nix
+      /virtualbox.nix
     ];
 
   networking.hostName = "wanderer";
