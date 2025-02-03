@@ -13,7 +13,7 @@
       /boot/system-boot.nix
       /qq.nix
       /desktop
-      /desktop/flavor/gnome.nix
+      /desktop/flavor/plasma6.nix
     ];
 
   networking.hostName = "explorer";

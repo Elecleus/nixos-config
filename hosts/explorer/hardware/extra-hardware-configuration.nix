@@ -1,6 +1,8 @@
 { ... }:
 
 {
+  services.fprintd.enable = true;
+
   fileSystems = {
     "/".options = [
       "ssd"
