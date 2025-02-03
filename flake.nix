@@ -22,7 +22,8 @@
     # };
     # anyrun.url = "github:Kirottu/anyrun";
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";  
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    daeuniverse.url = "github:daeuniverse/flake.nix";
   };
 
   outputs =
@@ -56,8 +57,10 @@
             #     users.elecleus = import ./home;
             #   };
             # }
-
             ./hosts/wanderer
+
+            inputs.daeuniverse.nixosModules.dae
+            inputs.daeuniverse.nixosModules.daed
           ];
         };
 
@@ -68,6 +71,9 @@
           };
           modules = [
             ./hosts/explorer
+
+            inputs.daeuniverse.nixosModules.dae
+            inputs.daeuniverse.nixosModules.daed
 
             # Actually Explorer goes lenovo-thinkpad-x390-yoga
             inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga

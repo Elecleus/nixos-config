@@ -37,7 +37,13 @@
   # };
 
   services = {
-    v2raya.enable = true;
+    daed = {
+      enable = true;
+      openFirewall = {
+        enable = true;
+        port = 12345;
+      };
+    };
   };
 
   users.users.elecleus = {

@@ -7,6 +7,7 @@
     ]
     ++ lib.map (path: ../../modules + path) [
       /programming
+      /programming/android.nix
       /boot/system-boot.nix
       /qq.nix
       /wechat.nix
@@ -14,7 +15,7 @@
       /docker.nix
       /desktop
       /desktop/flavor/plasma6.nix
-      /virtualbox.nix
+      /obs-studio.nix
     ];
 
   networking.hostName = "wanderer";
