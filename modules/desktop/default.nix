@@ -31,6 +31,7 @@
   };
 
   services = {
+    pulseaudio.enable = false;
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -39,7 +40,6 @@
   };
 
   hardware = {
-    pulseaudio.enable = false;
     graphics.enable = true;
     bluetooth.enable = true;
   };

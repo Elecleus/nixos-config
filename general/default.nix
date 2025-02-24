@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 {
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
@@ -52,15 +57,18 @@
     extraGroups = [ "wheel" ]; # Enable 'sudo' for the user.
   };
 
-  nix.settings = {
-    substituters = [
-      "https://mirrors.bfsu.edu.cn/nix-channels/store"
-      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
-      "https://mirrors.nju.edu.cn/nix-channels/store"
-    ];
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+  nix = {
+    registry.nixpkgs.flake = inputs.nixpkgs;
+    settings = {
+      substituters = [
+        "https://mirrors.bfsu.edu.cn/nix-channels/store"
+        "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+        "https://mirrors.nju.edu.cn/nix-channels/store"
+      ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
   };
 }

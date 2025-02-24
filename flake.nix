@@ -2,12 +2,11 @@
   description = "Elecleus's NixOS Flake";
 
   inputs = {
-    nipkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
     # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     # rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
 
@@ -30,7 +29,6 @@
     {
       self,
       nixpkgs,
-      nixos-wsl,
       home-manager,
       # nixos-cosmic,
       ...
@@ -59,7 +57,7 @@
             # }
             ./hosts/wanderer
 
-            inputs.daeuniverse.nixosModules.dae
+            # inputs.daeuniverse.nixosModules.dae
             inputs.daeuniverse.nixosModules.daed
           ];
         };
@@ -72,7 +70,7 @@
           modules = [
             ./hosts/explorer
 
-            inputs.daeuniverse.nixosModules.dae
+            # inputs.daeuniverse.nixosModules.dae
             inputs.daeuniverse.nixosModules.daed
 
             # Actually Explorer goes lenovo-thinkpad-x390-yoga
@@ -89,13 +87,11 @@
       "https://cosmic.cachix.org/"
       "https://nix-community.cachix.org"
       "https://hyprland.cachix.org"
-      # "https://niri.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      # "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     ];
   };
 }

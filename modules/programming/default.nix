@@ -5,6 +5,6 @@
     ./nix.nix
     ./cpp.nix
     ./rust.nix
-    ./manim.nix
+    # ./manim.nix
   ];
 }
