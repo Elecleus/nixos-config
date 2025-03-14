@@ -33,6 +33,7 @@
       # nixos-cosmic,
       ...
     }@inputs:
+    let username = "elecleus";in
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
@@ -40,7 +41,7 @@
         "wanderer" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
-            inherit inputs;
+            inherit inputs username;
           };
           modules = [
             # nixos-cosmic.nixosModules.default
@@ -65,7 +66,7 @@
         "explorer" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
-            inherit inputs;
+            inherit inputs username;
           };
           modules = [
             ./hosts/explorer

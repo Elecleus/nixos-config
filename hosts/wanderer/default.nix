@@ -21,4 +21,16 @@
     ];
 
   networking.hostName = "wanderer";
+
+  boot.loader.grub = {
+    useOSProber = lib.mkForce false;
+    extraEntries = ''
+      menuentry 'Windows Boot Manager' --class windows {
+          insmod part_gpt
+          insmod fat
+          search --no-floppy --fs-uuid --set=root 8867-BFAF
+          chainloader /EFI/Microsoft-shadowed/Boot/bootmgfw.efi
+      }
+    '';
+  };
 }

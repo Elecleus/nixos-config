@@ -2,9 +2,14 @@
   pkgs,
   lib,
   inputs,
+  username,
   ...
 }:
 {
+  imports = [
+    ./nh.nix
+  ];
+
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   environment = {
@@ -51,7 +56,7 @@
     };
   };
 
-  users.users.elecleus = {
+  users.users."${username}" = {
     uid = 1000;
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable 'sudo' for the user.
