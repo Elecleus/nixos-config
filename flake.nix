@@ -33,53 +33,49 @@
       # nixos-cosmic,
       ...
     }@inputs:
-    let username = "elecleus";in
+    let
+      username = "elecleus";
+    in
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
-      nixosConfigurations = {
-        "wanderer" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs username;
+      nixosConfigurations =
+        let
+          useHome = modules: modules ++ import ./home { inherit inputs username; };
+        in
+        {
+          "wanderer" = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+              inherit inputs username;
+            };
+            modules = useHome [
+              # nixos-cosmic.nixosModules.default
+
+              ./hosts/wanderer
+
+              # inputs.daeuniverse.nixosModules.dae
+              inputs.daeuniverse.nixosModules.daed
+            ];
           };
-          modules = [
-            # nixos-cosmic.nixosModules.default
 
-            # home-manager.nixosModules.home-manager
-            # {
-            #   home-manager = {
-            #     useGlobalPkgs = true;
-            #     useUserPackages = true;
-            #     extraSpecialArgs = inputs;
+          "explorer" = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+              inherit inputs username;
+            };
+            modules = useHome [
+              ./hosts/explorer
 
-            #     users.elecleus = import ./home;
-            #   };
-            # }
-            ./hosts/wanderer
+              # inputs.daeuniverse.nixosModules.dae
+              inputs.daeuniverse.nixosModules.daed
 
-            # inputs.daeuniverse.nixosModules.dae
-            inputs.daeuniverse.nixosModules.daed
-          ];
-        };
-
-        "explorer" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs username;
+              # Actually Explorer goes lenovo-thinkpad-x390-yoga
+              inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
+            ];
           };
-          modules = [
-            ./hosts/explorer
 
-            # inputs.daeuniverse.nixosModules.dae
-            inputs.daeuniverse.nixosModules.daed
-
-            # Actually Explorer goes lenovo-thinkpad-x390-yoga
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
-          ];
         };
-
-      };
     };
 
   nixConfig = {

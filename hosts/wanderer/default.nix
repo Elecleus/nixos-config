@@ -18,6 +18,7 @@
       # /desktop/flavor/cosmic.nix
       /obs-studio.nix
       # /ollama.nix
+      # /sunshine.nix
     ];
 
   networking.hostName = "wanderer";

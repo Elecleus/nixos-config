@@ -1,10 +1,17 @@
-{ inputs, pkgs, ... }:
+{ inputs, username, ... }:
+let
+  home-manager = inputs.home-manager;
+in
+[
+  home-manager.nixosModules.home-manager
 
-{
-  # imports = [
-  #   ./hyprland
-  #   ./anyrun.nix
-  # ];
+  {
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      extraSpecialArgs = inputs;
 
-  home.stateVersion = "23.11";
-}
+      users.elecleus = import (./. + "/${username}") {};
+    };
+  }
+]

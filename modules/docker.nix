@@ -1,3 +1,4 @@
+{ username, ... }:
 {
   virtualisation.docker = {
     rootless = {
@@ -5,7 +6,7 @@
       setSocketVariable = true;
     };
     daemon.settings = {
-      data-root = "/home/elecleus/Programs/docker-data";
+      data-root = "/home/${username}/Programs/docker-data";
       userland-proxy = false;
       experimental = true;
       ipv6 = true;
