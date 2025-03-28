@@ -11,7 +11,7 @@ in
       useUserPackages = true;
       extraSpecialArgs = inputs;
 
-      users.elecleus = import (./. + "/${username}") {};
+      users."${username}" = import (./. + "/${username}") {};
     };
   }
 ]

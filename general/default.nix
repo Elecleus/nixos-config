@@ -25,7 +25,10 @@
     # };
   };
 
-  programs.git.enable = true;
+  programs = {
+    git.enable = true;
+    fish.enable = true;
+  };
 
   time.timeZone = "Asia/Shanghai";
 
@@ -60,6 +63,7 @@
     uid = 1000;
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable 'sudo' for the user.
+    shell = pkgs.fish;
   };
 
   nix = {

@@ -2,14 +2,10 @@
 
 {
   programs = {
-    bash.enable = true;
-    direnv = {
-      enable = true;
-      enableBashIntegration = true;
-    };
+    fish.enable = true;
     starship = {
       enable = true;
-      enableBashIntegration = true;
+      enableFishIntegration = true;
     };
   };
   home.stateVersion = "24.11";
