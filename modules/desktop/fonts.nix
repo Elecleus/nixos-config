@@ -8,15 +8,15 @@
       defaultFonts = {
         emoji = [ "Noto Color Emoji" ];
         monospace = [
-          "Maple Mono SC NF"
+          "Maple Mono NF CN"
         ];
         sansSerif = [
           "Noto Sans CJK SC"
-          "Maple Mono SC NF"
+          "Maple Mono NF CN"
         ];
         serif = [
           "Noto Serif CJK SC"
-          "Maple Mono SC NF"
+          "Maple Mono NF CN"
         ];
       };
     };
@@ -27,7 +27,7 @@
       noto-fonts-cjk-serif
       noto-fonts-emoji
       # nerdfonts
-      maple-mono-SC-NF
+      maple-mono.NF-CN
     ];
   };
 }
