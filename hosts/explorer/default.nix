@@ -10,10 +10,12 @@
     ]
     ++ lib.map (path: ../../modules + path) [
       /programming
-      /boot/system-boot.nix
+      /boot/grub.nix
       /qq.nix
+      /wechat.nix
       /desktop
       /desktop/flavor/plasma6.nix
+      /obs-studio.nix
     ];
 
   networking.hostName = "explorer";
