@@ -72,6 +72,8 @@
 
               # Actually Explorer goes lenovo-thinkpad-x390-yoga
               inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
+
+              # (import ./overlays)
             ];
           };
 
