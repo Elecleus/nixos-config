@@ -21,7 +21,10 @@
     #   nvidiaBusId = "PCI:1:0:0";
     # };
     nvidiaSettings = true;
-    powerManagement = {enable = false; finegrained = false;};
+    powerManagement = {
+      enable = false;
+      finegrained = false;
+    };
   };
 
   boot.initrd.kernelModules = [

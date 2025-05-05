@@ -1,3 +1,3 @@
 {
-  nixpkgs.overlays = [];
+  nixpkgs.overlays = [ ];
 }

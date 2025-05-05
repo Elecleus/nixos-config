@@ -9,7 +9,7 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      intel-media-sdk   # for older GPUs
+      intel-media-sdk # for older GPUs
     ];
   };
 
