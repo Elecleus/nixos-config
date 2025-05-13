@@ -1,13 +1,5 @@
-{
-  lib,
-  ...
-}:
-{
-  imports =
-    [
-      ../../general
-      ./hardware
-    ]
+{ lib, ... }: {
+  imports = [ ../../general ./hardware ]
     ++ lib.map (path: ../../modules + path) [
       /programming
       /boot/grub.nix

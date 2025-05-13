@@ -1,4 +1,9 @@
-{ inputs, username, ... }:
+{
+  inputs,
+  username,
+  pkgs,
+  ...
+}:
 let
   home-manager = inputs.home-manager;
 in
@@ -11,7 +16,25 @@ in
       useUserPackages = true;
       extraSpecialArgs = inputs;
 
-      users."${username}" = import (./. + "/${username}") { };
+      users."${username}".imports = [
+        (./. + "/${username}")
+        (
+          { ... }:
+          {
+            wayland.windowManager.maomaowm = {
+              enable = true;
+              # settings = ''
+              #   # see config.conf
+              # '';
+              # autostart_sh = ''
+              #   # see autostart.sh
+              #   # Note: here no need to add shebang
+              # '';
+            };
+          }
+        )
+        inputs.maomaowm.hmModules.maomaowm
+      ];
     };
   }
 ]
