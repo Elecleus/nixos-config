@@ -6,7 +6,7 @@
       /qq.nix
       /wechat.nix
       /desktop
-      /desktop/flavor/cosmic.nix
+      /desktop/flavor/plasma6.nix
       /obs-studio.nix
     ];
 
