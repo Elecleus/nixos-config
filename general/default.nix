@@ -1,23 +1,10 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  username,
-  ...
-}:
-{
-  imports = [
-    ./nh.nix
-  ];
+{ pkgs, lib, inputs, username, ... }: {
+  imports = [ ./nh.nix ];
 
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   environment = {
-    systemPackages = with pkgs; [
-      fastfetch
-      tree
-      helix
-    ];
+    systemPackages = with pkgs; [ fastfetch tree helix ];
 
     # shellAliases = {
     #   edge-wayland = "microsoft-edge --ozone-platform=wayland --enable-wayland-ime";
@@ -57,6 +44,15 @@
         port = 12345;
       };
     };
+    openssh = {
+      enable = true;
+      ports = [ 22 ];
+      settings = {
+        X11Forwarding = true;
+        PermitRootLogin =
+          "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+      };
+    };
   };
 
   users.users."${username}" = {
@@ -74,10 +70,7 @@
         "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
         "https://mirrors.nju.edu.cn/nix-channels/store"
       ];
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+      experimental-features = [ "nix-command" "flakes" ];
     };
   };
 }
