@@ -26,70 +26,56 @@
     maomaowm.url = "github:DreamMaoMao/maomaowm";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      # nixos-cosmic,
-      ...
-    }@inputs:
-    let
-      username = "elecleus";
-    in
-    {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+  outputs = { self, nixpkgs, home-manager,
+    # nixos-cosmic,
+    ... }@inputs:
+    let username = "elecleus";
+    in {
+      formatter.x86_64-linux =
+        nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
-      nixosConfigurations =
-        let
-          useHome =
-            system: modules:
-            modules
-            ++ import ./home {
-              inherit inputs username;
-              pkgs = import nixpkgs { inherit system; };
-            };
-        in
-        {
-          "wanderer" = nixpkgs.lib.nixosSystem rec {
-            system = "x86_64-linux";
-            specialArgs = {
-              inherit inputs username;
-            };
-            modules = useHome system [
-              # nixos-cosmic.nixosModules.default
-
-              ./hosts/wanderer
-
-              # inputs.daeuniverse.nixosModules.dae
-              inputs.daeuniverse.nixosModules.daed
-              
-              inputs.maomaowm.nixosModules.maomaowm
-              {
-                programs.maomaowm.enable = true;
-              }
-            ];
+      nixosConfigurations = let
+        useHome = system: modules:
+          modules ++ import ./home {
+            inherit inputs username;
+            pkgs = import nixpkgs { inherit system; };
           };
+      in {
+        "wanderer" = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs username; };
+          modules = useHome system [
+            # nixos-cosmic.nixosModules.default
 
-          "explorer" = nixpkgs.lib.nixosSystem rec {
-            system = "x86_64-linux";
-            specialArgs = {
-              inherit inputs username;
-            };
-            modules = useHome system [
-              ./hosts/explorer
+            ./hosts/wanderer
 
-              # inputs.daeuniverse.nixosModules.dae
-              inputs.daeuniverse.nixosModules.daed
+            # inputs.daeuniverse.nixosModules.dae
+            inputs.daeuniverse.nixosModules.daed
 
-              # Actually Explorer goes lenovo-thinkpad-x390-yoga
-              inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
+            inputs.maomaowm.nixosModules.maomaowm
+            { programs.maomaowm.enable = true; }
 
-              # (import ./overlays)
-            ];
-          };
-
+            (import ./overlays)
+          ];
         };
+
+        "explorer" = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs username; };
+          modules = useHome system [
+            ./hosts/explorer
+
+            # inputs.daeuniverse.nixosModules.dae
+            inputs.daeuniverse.nixosModules.daed
+
+            # Actually Explorer goes lenovo-thinkpad-x390-yoga
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
+
+            # (import ./overlays)
+          ];
+        };
+
+      };
     };
 
   nixConfig = {

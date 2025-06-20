@@ -2,6 +2,7 @@
   imports = [ ./nh.nix ];
 
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+  hardware.enableRedistributableFirmware = true;
 
   environment = {
     systemPackages = with pkgs; [ fastfetch tree helix ];
