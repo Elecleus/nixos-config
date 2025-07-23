@@ -6,8 +6,6 @@
       ./hardware
     ]
     ++ lib.map (path: ../../modules + path) [
-      /programming
-      # /programming/android.nix
       /boot/grub.nix
       /qq.nix
       /wechat.nix
@@ -24,15 +22,27 @@
 
   networking.hostName = "wanderer";
 
+  elecleus.developing = {
+    enable = true;
+    sets = [
+      "cpp"
+      "nix"
+      "python"
+      "rust"
+      "st"
+      "typst"
+    ];
+  };
+
   boot.loader.grub = {
     useOSProber = lib.mkForce false;
-    extraEntries = ''
-      menuentry 'Windows Boot Manager' --class windows {
-          insmod part_gpt
-          insmod fat
-          search --no-floppy --fs-uuid --set=root 8867-BFAF
-          chainloader /EFI/Microsoft-shadowed/Boot/bootmgfw.efi
-      }
-    '';
+    # extraEntries = ''
+    #   menuentry 'Windows Boot Manager' --class windows {
+    #       insmod part_gpt
+    #       insmod fat
+    #       search --no-floppy --fs-uuid --set=root 8867-BFAF
+    #       chainloader /EFI/Microsoft-shadowed/Boot/bootmgfw.efi
+    #   }
+    # '';
   };
 }

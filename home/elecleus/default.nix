@@ -17,13 +17,11 @@
           select = "underline";
         };
       };
-      languages.language = [
-        {
-          name = "nix";
-          auto-format = true;
-          formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
-        }
-      ];
+      languages.language = [{
+        name = "nix";
+        auto-format = true;
+        formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+      }];
       themes = {
         catppuccin_macchiato_transparent = {
           "inherits" = "catppuccin_macchiato";
@@ -33,9 +31,7 @@
     };
   };
 
-  xdg.configFile = {
-    "xournalpp/toolbar.ini".source = ./toolbar.ini;
-  };
+  xdg.configFile = { "xournalpp/toolbar.ini".source = ./toolbar.ini; };
 
   home.stateVersion = "24.11";
 }
