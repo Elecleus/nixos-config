@@ -1,13 +1,6 @@
-{
-  inputs,
-  username,
-  pkgs,
-  ...
-}:
-let
-  home-manager = inputs.home-manager;
-in
-[
+{ inputs, username, pkgs, ... }:
+let home-manager = inputs.home-manager;
+in [
   home-manager.nixosModules.home-manager
 
   {
@@ -18,22 +11,19 @@ in
 
       users."${username}".imports = [
         (./. + "/${username}")
-        (
-          { ... }:
-          {
-            wayland.windowManager.maomaowm = {
-              enable = true;
-              # settings = ''
-              #   # see config.conf
-              # '';
-              # autostart_sh = ''
-              #   # see autostart.sh
-              #   # Note: here no need to add shebang
-              # '';
-            };
-          }
-        )
-        inputs.maomaowm.hmModules.maomaowm
+        ({ ... }: {
+          wayland.windowManager.mango = {
+            enable = true;
+            # settings = ''
+            #   # see config.conf
+            # '';
+            # autostart_sh = ''
+            #   # see autostart.sh
+            #   # Note: here no need to add shebang
+            # '';
+          };
+        })
+        inputs.mango.hmModules.mango
       ];
     };
   }

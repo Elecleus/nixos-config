@@ -1,11 +1,22 @@
-{ pkgs, lib, inputs, username, ... }: {
+{
+  pkgs,
+  lib,
+  inputs,
+  username,
+  ...
+}:
+{
   imports = [ ./nh.nix ];
 
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
   hardware.enableRedistributableFirmware = true;
 
   environment = {
-    systemPackages = with pkgs; [ fastfetch tree helix ];
+    systemPackages = with pkgs; [
+      fastfetch
+      tree
+      helix
+    ];
 
     # shellAliases = {
     #   edge-wayland = "microsoft-edge --ozone-platform=wayland --enable-wayland-ime";
@@ -50,8 +61,7 @@
       ports = [ 22 ];
       settings = {
         X11Forwarding = true;
-        PermitRootLogin =
-          "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+        PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
       };
     };
   };
@@ -59,7 +69,10 @@
   users.users."${username}" = {
     uid = 1000;
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable 'sudo' for the user.
+    extraGroups = [
+      "wheel"
+      "dialout"
+    ]; # Enable 'sudo' for the user.
     shell = pkgs.fish;
   };
 
@@ -71,7 +84,10 @@
         "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
         "https://mirrors.nju.edu.cn/nix-channels/store"
       ];
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
 }

@@ -1,5 +1,9 @@
 {
-  # nixpkgs.config.allowUnfree = true;
-  virtualisation.virtualbox.host.enable = true;
-  # virtualisation.virtualbox.host.enableExtensionPack = true;
+  nixpkgs.config.allowUnfree = true;
+  
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+  };
+  users.extraGroups.vboxusers.members = [ "elecleus" ];
 }
