@@ -7,12 +7,12 @@
   ++ lib.map (path: ../../modules + path) [
     /boot/grub.nix
     /qq.nix
-    /wechat.nix
+    # /wechat.nix
     /steam.nix
     /container.nix
     /desktop
-    /desktop/flavor/plasma6.nix
-    # /desktop/flavor/cosmic.nix
+    # /desktop/flavor/plasma6.nix
+    /desktop/flavor/cosmic.nix
     /obs-studio.nix
     # /ollama.nix
     # /sunshine.nix

@@ -1,7 +1,12 @@
 { config, ... }:
 
 {
-  services.xserver = { videoDrivers = [ "nvidia" "amdgpu" ]; };
+  services.xserver = {
+    videoDrivers = [
+      "nvidia"
+      "amdgpu"
+    ];
+  };
 
   hardware = {
     nvidia = {
@@ -31,11 +36,25 @@
   #   "amdgpu"
   # ];
 
-  boot.kernelModules =
-    [ "kvm-amd" "amdgpu" "nvidia" ]; # ++ config.boot.initrd.kernelModules;
+  boot.kernelModules = [
+    "kvm-amd"
+    "amdgpu"
+    "nvidia"
+  ]; # ++ config.boot.initrd.kernelModules;
 
   fileSystems = {
-    "/".options = [ "ssd" "discard" "noatime" "compress=zstd" ];
+    "/".options = [
+      "ssd"
+      "discard"
+      "noatime"
+      "compress=zstd"
+    ];
+    "/home".options = [
+      "ssd"
+      "discard"
+      "noatime"
+      "compress=zstd"
+    ];
     "/boot/efi".options = [ "noatime" ];
   };
 }

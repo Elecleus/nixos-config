@@ -17,8 +17,8 @@
   boot.initrd.availableKernelModules = [
     "nvme"
     "xhci_pci"
-    "usb_storage"
     "usbhid"
+    "usb_storage"
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
@@ -26,17 +26,24 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/31a5d101-615f-4e4b-b5d7-1450b82fdf5a";
+    device = "/dev/disk/by-uuid/b320cbc5-4dda-48cb-a87a-6e6229c6dffa";
     fsType = "btrfs";
+    options = [ "subvol=@System" ];
   };
 
   fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/8867-BFAF";
+    device = "/dev/disk/by-uuid/0BE5-CCEC";
     fsType = "vfat";
     options = [
       "fmask=0022"
       "dmask=0022"
     ];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/b320cbc5-4dda-48cb-a87a-6e6229c6dffa";
+    fsType = "btrfs";
+    options = [ "subvol=@Home" ];
   };
 
   swapDevices = [ ];
