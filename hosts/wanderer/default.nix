@@ -29,7 +29,7 @@
       "nix"
       "python"
       "rust"
-      "st"
+      # "st"
       "typst"
     ];
   };
@@ -42,7 +42,7 @@
       menuentry 'Windows Boot Manager' --class windows {
           insmod part_gpt
           insmod fat
-          search --no-floppy --fs-uuid --set=root 8867-BFAF
+          search --no-floppy --fs-uuid --set=root 0BE5-CCEC
           chainloader /EFI/Microsoft-shadowed/Boot/bootmgfw.efi
       }
     '';

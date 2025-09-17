@@ -72,12 +72,14 @@
     extraGroups = [
       "wheel"
       "dialout"
+      "docker"
     ]; # Enable 'sudo' for the user.
     shell = pkgs.fish;
   };
 
   nix = {
-    registry.nixpkgs.flake = inputs.nixpkgs;
+    # registry.nixpkgs.flake = inputs.nixpkgs;
+    channel.enable = false;
     settings = {
       substituters = [
         "https://mirrors.bfsu.edu.cn/nix-channels/store"

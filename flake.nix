@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
     # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
-    # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    cosmic-unstable.url = "github:ninelore/nixpkgs-cosmic-unstable";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     # rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
@@ -26,61 +26,70 @@
     mango.url = "github:DreamMaoMao/mango";
   };
 
-  outputs = { self, nixpkgs, home-manager,
-    # nixos-cosmic,
-    ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      # nixos-cosmic,
+      ...
+    }@inputs:
     let
       username = "elecleus";
       mylib = import ./lib { lib = nixpkgs.lib; };
-    in {
-      formatter.x86_64-linux =
-        nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+    in
+    {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
-      nixosConfigurations = let
-        useHome = system: modules:
-          modules ++ import ./home {
-            inherit inputs username;
-            pkgs = import nixpkgs { inherit system; };
+      nixosConfigurations =
+        let
+          useHome =
+            system: modules:
+            modules
+            ++ import ./home {
+              inherit inputs username;
+              pkgs = import nixpkgs { inherit system; };
+            };
+        in
+        {
+          "wanderer" = nixpkgs.lib.nixosSystem rec {
+            system = "x86_64-linux";
+            specialArgs = { inherit inputs username mylib; };
+            modules = useHome system [
+              # inputs.cosmic-unstable.nixosModules.default
+
+              ./hosts/wanderer
+
+              # inputs.daeuniverse.nixosModules.dae
+              inputs.daeuniverse.nixosModules.daed
+
+              # inputs.mango.nixosModules.mango
+              # {
+              #   programs.mango.enable = true;
+              # }
+
+              # (import ./overlays)
+              ./modules
+            ];
           };
-      in {
-        "wanderer" = nixpkgs.lib.nixosSystem rec {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs username mylib; };
-          modules = useHome system [
-            # nixos-cosmic.nixosModules.default
 
-            ./hosts/wanderer
+          "explorer" = nixpkgs.lib.nixosSystem rec {
+            system = "x86_64-linux";
+            specialArgs = { inherit inputs username; };
+            modules = useHome system [
+              ./hosts/explorer
 
-            # inputs.daeuniverse.nixosModules.dae
-            inputs.daeuniverse.nixosModules.daed
+              # inputs.daeuniverse.nixosModules.dae
+              inputs.daeuniverse.nixosModules.daed
 
-            inputs.mango.nixosModules.mango
-            {
-              programs.mango.enable = true;
-            }
+              # Actually Explorer goes lenovo-thinkpad-x390-yoga
+              inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
 
-            # (import ./overlays)
-            ./modules
-          ];
+              # (import ./overlays)
+            ];
+          };
+
         };
-
-        "explorer" = nixpkgs.lib.nixosSystem rec {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs username; };
-          modules = useHome system [
-            ./hosts/explorer
-
-            # inputs.daeuniverse.nixosModules.dae
-            inputs.daeuniverse.nixosModules.daed
-
-            # Actually Explorer goes lenovo-thinkpad-x390-yoga
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
-
-            # (import ./overlays)
-          ];
-        };
-
-      };
     };
 
   nixConfig = {
