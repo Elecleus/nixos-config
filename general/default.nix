@@ -16,6 +16,7 @@
       fastfetch
       tree
       helix
+      bat
     ];
 
     # shellAliases = {
