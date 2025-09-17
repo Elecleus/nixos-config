@@ -5,16 +5,26 @@
     ./hardware
   ]
   ++ lib.map (path: ../../modules + path) [
-    /programming
-    /programming/stm32.nix
     /boot/grub.nix
-    /qq.nix
-    /wechat.nix
+    # /qq.nix
+    # /wechat.nix
     /desktop
-    /desktop/flavor/plasma6.nix
-    /obs-studio.nix
+    /desktop/flavor/cosmic.nix
+    # /obs-studio.nix
     /zerotierone.nix
   ];
 
   networking.hostName = "explorer";
+
+  elecleus.developing = {
+    enable = true;
+    sets = [
+      "cpp"
+      "nix"
+      "python"
+      "rust"
+      # "st"
+      "typst"
+    ];
+  };
 }
