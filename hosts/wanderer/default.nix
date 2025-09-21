@@ -8,12 +8,12 @@
     /boot/grub.nix
     /qq.nix
     # /wechat.nix
-    /steam.nix
+    # /steam.nix
     /container.nix
     /desktop
     # /desktop/flavor/plasma6.nix
     /desktop/flavor/cosmic.nix
-    /obs-studio.nix
+    # /obs-studio.nix
     # /ollama.nix
     # /sunshine.nix
     /zerotierone.nix
