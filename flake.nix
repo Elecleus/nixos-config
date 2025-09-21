@@ -3,9 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
-    # nixpkgs.follows = "nixos-cosmic/nixpkgs";
-
-    cosmic-unstable.url = "github:ninelore/nixpkgs-cosmic-unstable";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     # rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
@@ -15,15 +12,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # hyprland = {
-    #   url = "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.45.2";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # anyrun.url = "github:Kirottu/anyrun";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     daeuniverse.url = "github:daeuniverse/flake.nix";
-    mango.url = "github:DreamMaoMao/mango";
+    # mango.url = "github:DreamMaoMao/mango";
   };
 
   outputs =
@@ -56,8 +47,6 @@
             system = "x86_64-linux";
             specialArgs = { inherit inputs username mylib; };
             modules = useHome system [
-              # inputs.cosmic-unstable.nixosModules.default
-
               ./hosts/wanderer
 
               # inputs.daeuniverse.nixosModules.dae
