@@ -1,6 +1,7 @@
 {
   config,
   default-username,
+  inputs,
   lib,
   pkgs,
   ...
@@ -65,9 +66,9 @@ in
         networking.networkmanager.enable = true;
 
         nix = {
-          # registry.nixpkgs.flake = inputs.nixpkgs;
           channel.enable = false;
           settings = {
+            flake-registry = "${inputs.flake-registry}/flake-registry.json";
             substituters = [
               "https://mirrors.bfsu.edu.cn/nix-channels/store"
               "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
