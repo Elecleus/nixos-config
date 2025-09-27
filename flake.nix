@@ -2,7 +2,7 @@
   description = "Elecleus's NixOS Flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:HeitorAugustoLN/nixpkgs/cosmic-beta";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     # rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
@@ -45,7 +45,10 @@
         {
           "wanderer" = nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
-            specialArgs = { inherit inputs username mylib; };
+            specialArgs = {
+              inherit inputs mylib;
+              default-username = username;
+            };
             modules = useHome system [
               ./hosts/wanderer
 

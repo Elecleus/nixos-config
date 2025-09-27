@@ -1,3 +1,7 @@
 {
-  imports = [ ./developing ];
+  imports = [
+    ./base
+    ./boot
+    ./developing
+  ];
 }

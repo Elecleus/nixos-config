@@ -1,11 +1,9 @@
 { lib, ... }:
 {
   imports = [
-    ../../general
     ./hardware
   ]
   ++ lib.map (path: ../../modules + path) [
-    /boot/grub.nix
     /qq.nix
     # /wechat.nix
     # /steam.nix
@@ -22,16 +20,20 @@
 
   networking.hostName = "wanderer";
 
-  elecleus.developing = {
-    enable = true;
-    sets = [
-      "cpp"
-      "nix"
-      "python"
-      "rust"
-      # "st"
-      "typst"
-    ];
+  elecleus = {
+    base.enable = true;
+    boot.enable = true;
+    developing = {
+      enable = true;
+      sets = [
+        "cpp"
+        "nix"
+        "python"
+        "rust"
+        # "st"
+        "typst"
+      ];
+    };
   };
 
   # services.tftpd.enable = true;

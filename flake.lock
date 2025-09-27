@@ -124,15 +124,16 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1758475266,
-        "narHash": "sha256-4gLVJa6RccTSjAAiDlZdEEUqdpfWlGMWHXZWtBOwfr4=",
-        "owner": "NixOS",
+        "lastModified": 1758475497,
+        "narHash": "sha256-1R5q/aDIDUenpYakEyULbXGnYc4azWhpTt53+s92UHQ=",
+        "owner": "HeitorAugustoLN",
         "repo": "nixpkgs",
-        "rev": "899966af18681b638a0a03cfc864ac4962028c65",
+        "rev": "22388fff4e3a3383f5dab2a285c3488ec80db1e4",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "HeitorAugustoLN",
+        "ref": "cosmic-beta",
         "repo": "nixpkgs",
         "type": "github"
       }
